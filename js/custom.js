@@ -105,13 +105,29 @@ async function loadMovie(imdbID) {
   }
 }
 
+const callbackFunction = function(entries) {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      const lazyImage = entry.target;
+      console.log("lazy loading ", lazyImage);
+      lazyImage.src = lazyImage.getAttribute('data-src');
+      lazyImage.classList.remove("lzy_img");
+      imageObserver.unobserve(lazyImage);
+    }
+  });
+}
+
+const imageObserver = new IntersectionObserver(callbackFunction, {
+  rootMargin: "15px"
+});
+
 const showMovie = (selector, URL, title, released, plot, imdbID, imdbType) => {
   selector.innerHTML += `
     <div class="colonnes-3">
       <div class="carte">
         <h4>${title}</h4>
         <p>${released}</p>
-        <img class="image-carte" src='${URL}' alt='${title}'/>
+        <img class="lzy_img image-carte" src="lzy_img" data-src='${URL}' alt='${title}'/>
         <div style="text-align: center;margin-top: 5px;">
           <button class="btn btn-dark" id="read-more-button" onClick="invokeModal(event)" data-arg1='${URL}' data-arg2='${title}' data-arg3='${released}' data-arg4='${plot}'>Read More</button>
         </div>
@@ -119,6 +135,14 @@ const showMovie = (selector, URL, title, released, plot, imdbID, imdbType) => {
     </div>
   `;
 }
+
+var divMO = new window.MutationObserver(function(e) {
+  const arr = document.querySelectorAll('img.lzy_img')
+    arr.forEach((v) => {
+      imageObserver.observe(v);
+  });
+});
+divMO.observe(designDiv, { childList: true, subtree: true, characterData: true });
 
 const invokeModal = (event) => {
   console.log(event);
