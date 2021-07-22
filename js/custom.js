@@ -44,18 +44,23 @@ loadButton.addEventListener("click", () => {
   }, 6000);
   loadMovies().then(function(res) {
     designDiv.innerHTML = "";
+    log("");
     clearTimeout(delay);
     if (res !== null && res !== undefined) {
       //console.log(`res: ${JSON.stringify(res)}`);
       const results = res.Search;
-      const totalResults = results.length;
-      //console.log(`Fetched results: ${JSON.stringify(results)}`);
-      delay = setTimeout(() => {
-	log(`${totalResults} Movie${totalResults > 1 ? "s have to " : " has to "} be loaded.`);
-      }, 6000);
-      clearTimeout(delay);
-      results.map((result) => searchMovie(designDiv, result.Poster, result.Title, result.Year, result.imdbID, result.Type));
-      log(`${totalResults} Movie${totalResults > 1 ? "s have " : " has "} been loaded.`);
+      if (results !== null && results !== undefined) {
+        const totalResults = results.length;
+        //console.log(`Fetched results: ${JSON.stringify(results)}`);
+        delay = setTimeout(() => {
+	  log(`${totalResults} Movie${totalResults > 1 ? "s have to " : " has to "} be loaded.`);
+        }, 6000);
+        clearTimeout(delay);
+        results.map((result) => searchMovie(designDiv, result.Poster, result.Title, result.Year, result.imdbID, result.Type));
+        log(`${totalResults} Movie${totalResults > 1 ? "s have " : " has "} been loaded.`);
+      } else {
+        log("None movie was found with these key words!");
+      }
     }
   });
 });
@@ -74,6 +79,8 @@ function searchMovie(selector, URL, title, year, imdbID, imdbType) {
       if (res !== null && res !== undefined) {
         //console.log(`res: ${JSON.stringify(res)}`);
         showMovie(designDiv, res.Poster, res.Title, res.Released, res.Plot, res.imdbID, res.Type);
+      } else {
+        log("None movie was found with this Id!");
       }
     });
   }
