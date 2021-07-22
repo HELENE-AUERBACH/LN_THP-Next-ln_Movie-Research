@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Page HTML affichant la liste des films dont les noms correspondent aux mots clefs recherchés par l'utilisateur à partir de l'API http://www.omdbapi.com/">
+    <meta name="author" content="Hatching Hacking Cercle">
+    
+    <!-- Police pour le titre -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <!-- Police pour le texte -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2? family=Montserrat:ital,wght@1,200&family=Roboto:wght@500&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./css/bootstrap.css">
+    <link rel="stylesheet" href="./css/custom.css">
+    
+    <title>The Movies Researching Hacking Site</title>
+  </head>
+  <body>
+    <h1 style="font-family: 'Roboto', sans-serif;">
+      FILMFINDER
+    </h1>
+    <div id="input-form-content">
+      <form action="#" novalidate>
+        <p>
+          <label for="keyWords">
+            <span>Veuillez saisir un ou plusieurs mot(s) - séparés par des espaces - du titre du/des film(s)/série(s) que vous recherchez* :</span>
+            <input type="text" id="keyWords" name="keyWords" required>
+            <span class="error" aria-live="polite"></span>
+          </label>
+        </p>
+        <button id="load-button">Submit</button>
+      </form>
+    </div>
+    <div id="message">Click to research the movies.</div>
+    <div class="containeur">
+      <div id="design-div" class="ligne">
+      </div>
+    </div>
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Bootstrap JS, then custom JS -->
+    <script src="./js/jquery.min.js"></script>
+    <!-- <script src="./js/bootstrap.bundle.min.js"></script> -->
+    <script src="./js/custom.js"></script>
+  </body>
+</html>
