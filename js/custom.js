@@ -22,7 +22,7 @@ window.onclick = function(event) {
 
 async function loadMovies() {
   try {
-    const response = await fetch(`http://www.omdbapi.com/?s=${encodeURIComponent(keyWords.value)}&apikey=ce0e87a6`);
+    const response = await fetch(`https://www.omdbapi.com/?s=${encodeURIComponent(keyWords.value)}&apikey=ce0e87a6`);
     //console.log(response);
     if (response.ok) {
       const responseJson = await response.json();
@@ -89,7 +89,7 @@ function searchMovie(selector, URL, title, year, imdbID, imdbType) {
 async function loadMovie(imdbID) {
   if (imdbID !== null && imdbID !== undefined) {
     try {
-      const response = await fetch(`http://www.omdbapi.com/?i=${imdbID}&plot=full&apikey=ce0e87a6`);
+      const response = await fetch(`https://www.omdbapi.com/?i=${imdbID}&plot=full&apikey=ce0e87a6`);
       //console.log(response);
       if (response.ok) {
         const responseJson = await response.json();
